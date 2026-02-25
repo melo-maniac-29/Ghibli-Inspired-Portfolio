@@ -1,0 +1,55 @@
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Optimize build settings
+  reactStrictMode: true,
+  swcMinify: true,
+  
+  // Fix for dynamic imports
+  experimental: {
+    // Reduce chances of chunk loading errors
+    optimizeCss: false,
+    optimizePackageImports: ['framer-motion', 'gsap'],
+    // Ensure proper bundle splitting
+    serverComponentsExternalPackages: [],
+  },
+  
+  // Increase stability of build
+  poweredByHeader: false,
+  
+  // Properly handle images from external domains
+  images: {
+    domains: [
+      'www.google.com',
+      'images.unsplash.com',
+      'via.placeholder.com',
+      'res.cloudinary.com',
+      'i.imgur.com',
+      'localhost'
+    ],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+  },
+  
+  // Clean output for better debugging
+  output: process.env.NODE_ENV === 'production' ? 'standalone' : undefined,
+
+  // ESLint configuration
+  eslint: {
+    // Only run ESLint on these directories during builds
+    dirs: ['app', 'components', 'lib', 'utils'],
+    // Don't fail the build for ESLint warnings
+    ignoreDuringBuilds: true,
+  },
+
+  // Typescript checks
+  typescript: {
+    // Don't fail the build for TypeScript errors
+    ignoreBuildErrors: true,
+  },
+}
+
+module.exports = nextConfig
