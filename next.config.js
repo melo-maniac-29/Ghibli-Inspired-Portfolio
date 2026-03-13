@@ -41,8 +41,8 @@ const nextConfig = {
   eslint: {
     // Only run ESLint on these directories during builds
     dirs: ['app', 'components', 'lib', 'utils'],
-    // Don't fail the build for ESLint warnings
-    ignoreDuringBuilds: true,
+    // Fail the build on ESLint warnings to enforce code quality
+    ignoreDuringBuilds: false,
   },
 
   // Typescript checks
